@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using Pastel;
 
 class InventoryManagementSystem
 {
@@ -41,7 +43,7 @@ class InventoryManagementSystem
         while (true)
         {
             // Prompt the user to select an option
-            Console.WriteLine("Inventory Manager");
+            Console.WriteLine("Inventory Manager".Pastel(Color.Green));
             Console.WriteLine("1. Add Item");
             Console.WriteLine("2. Sell Item");
             Console.WriteLine("3. Remove Item");
