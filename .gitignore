@@ -1,6 +1,10 @@
 # Build Folders
+# C#
 bin/
 obj/
+# HTML
+build/
+dist/
 
 # Rider Specific
 .idea/
@@ -74,6 +78,8 @@ node_modules/
 
 # Environment variables
 .env
+.env.local
+.env.*.local
 
 # .NET user secrets
 secrets.json
@@ -105,6 +111,8 @@ _ReSharper.Caches/
 # Temporary folders
 tmp/
 temp/
+*.tmp
+*.temp
 
 # Other general exclusions
 *.lock
