@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\InventoryManagementSystem.csproj": {}
+    "C:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\InventoryManagementSystem.csproj": {}
   },
   "projects": {
-    "c:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\InventoryManagementSystem.csproj": {
+    "C:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\InventoryManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
+        "projectUniqueName": "C:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
         "projectName": "InventoryManagementSystem",
-        "projectPath": "c:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
+        "projectPath": "C:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
         "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\obj\\",
+        "outputPath": "C:\\Users\\micha\\Projects\\C#\\MicrosoftFullStackDeveloperCertification\\FoundationsOfCodingFullStack\\InventoryManagementSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config"
