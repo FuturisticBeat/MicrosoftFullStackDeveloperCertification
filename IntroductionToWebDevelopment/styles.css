@@ -1,0 +1,59 @@
+/* Reset margins and paddings */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* Basic Styling */
+html, body {
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.6;
+    background-color: #D3D3D3;
+    min-width: 320px; /* Most common min width setting for a mobile-first approach */
+}
+/* Flexbox wrapper for dynamic vertical spacing of content */
+.content-fill-vertical {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+/* Header and Footer Styling */
+header, footer {
+    background-color: #A47764;
+    color: #000000;
+    text-align: center;
+    padding: 10px;
+}
+/* Navigation Styling */
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    background-color: #FFFFFF;
+    padding: 10px;
+}
+/* Navigation Links Styling */
+nav ul li a {
+    color: #000000;
+}
+/* Main Content Layout */
+main {
+    display: flex;
+    flex-grow: 1; /* Grow to fill available space */
+    justify-content: space-between;
+    margin: 20px;
+}
+aside {
+    width: 20%;
+}
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        justify-content: flex-start; /* Aligns items at the top. */
+    }
+    aside {
+        width: 100%;
+        margin-top: 20px;
+    }
+}

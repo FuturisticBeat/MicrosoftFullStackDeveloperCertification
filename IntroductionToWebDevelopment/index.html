@@ -1,29 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1>Welcome to My Personal Webpage</h1>
-    <h2>About Me</h2>
-    <p>I am Michael Maranan a FullStack Developer.</p>
+    <div class="content-fill-vertical">
+        <header>
+            <h1>Welcome to My Personal Webpage</h1>
+        </header>
 
-    <h3>Hobbies</h3>
-    <ul>
-        <li>Movies</li>
-        <li>Games</li>
-    </ul>
+        <nav>
+            <ul>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#About">About</a></li>
+                <li><a href="#Contact">Contact</a></li>
+            </ul>
+        </nav>
 
-    <h3>Personal Goals</h3>
-    <ol>
-        <li>Get a new job</li>
-        <li>Get healthy</li>
-    </ol>
+        <main>
+            <section>
+                <h3>Hobbies</h3>
+                <ul>
+                    <li>Movies</li>
+                    <li>Games</li>
+                </ul>
+            </section>
 
+            <aside>
+                <h3>Personal Goals</h3>
+                <ol>
+                    <li>Get a new job</li>
+                    <li>Get healthy</li>
+                </ol>
+            </aside>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Futuristic Beat. All rights reserved.</p>
+        </footer>
+    </div>
+    <!--
     <h3>Feedback Form</h3>
     <form action="submit.html" method="post">
         <label for="name">Name:</label>
@@ -37,15 +58,17 @@
         <label>Rate the Site:</label>
         <input type="radio" id="excellent" name="rating" value="excellent">
         <label for="excellent">Excellent</label>
-        
+
         <input type="radio" id="good" name="rating" value="good">
         <label for="good">Good</label>
-        
+
         <input type="radio" id="average" name="rating" value="average">
         <label for="average">Average</label>
 
         <input type="submit" value="Submit">
     </form>
+    -->
+
 </body>
 
 </html>
