@@ -16,58 +16,104 @@
 
         <nav>
             <ul>
-                <li><a href="#Home">Home</a></li>
                 <li><a href="#About">About</a></li>
+                <li><a href="#Projects">Projects</a></li>
                 <li><a href="#Contact">Contact</a></li>
             </ul>
         </nav>
 
         <main>
-            <section>
-                <h3>Hobbies</h3>
-                <ul>
-                    <li>Movies</li>
-                    <li>Games</li>
-                </ul>
+            <!-- About Me -->
+            <section class="about-skills-grid" id="About">
+                <div class="card box-border-shadow">
+                    <h2>Professional Summary</h2>
+                    <br>
+                    <p>
+                        Dynamic Senior Software Engineer with extensive experience in developing polished applications
+                        and games using Unity.
+                        Proficient in both 2D and 3D Unity development and highly skilled in C#, demonstrating a strong
+                        combination of
+                        technical expertise and teamwork. Expert in creating development tools and frameworks that
+                        enhance productivity and
+                        streamline feature implementation. Fast learner with a proven ability to quickly adopt new and
+                        unfamiliar technologies in
+                        high-stakes settings.
+                    </p>
+                </div>
+
+                <aside class="card box-border-shadow" style="min-width: 250px;">
+                    <h2>Skills</h2>
+                    <ul>
+                        <li>HTML<img
+                                src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
+                                alt="HTML Logo"></li>
+                        <li>CSS<img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
+                                alt="CSS Logo"></li>
+                        <li>JavaScript<img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
+                                alt="JavaScript Logo"></li>
+                        <li>C#<img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg"
+                                alt="C# Logo"></li>
+                    </ul>
+                </aside>
             </section>
 
-            <aside>
-                <h3>Personal Goals</h3>
-                <ol>
-                    <li>Get a new job</li>
-                    <li>Get healthy</li>
-                </ol>
-            </aside>
+            <!-- Projects -->
+            <section class="projects card box-border-shadow" id="Projects">
+                <h2>Projects</h2>
+                <br>
+                <section class="project-cards-grid">
+                    <div class="project-card">
+                        <div class="project-card-content">
+                            <img class="box-border-shadow" src="https://picsum.photos/600" alt="Random Image">
+                            <h3>Project 1</h3>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-card-content">
+                            <img class="box-border-shadow" src="https://picsum.photos/600" alt="Random Image">
+                            <h3>Project 2</h3>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-card-content">
+                            <img class="box-border-shadow" src="https://picsum.photos/600" alt="Random Image">
+                            <h3>Project 3</h3>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-card-content">
+                            <img class="box-border-shadow" src="https://picsum.photos/600" alt="Random Image">
+                            <h3>Project 4</h3>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Contact -->
+            <section class="contact-wrapper">
+                <section class="contact card box-border-shadow" id="Contact">
+                    <h2>Contact Me</h2>
+                    <form>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        <br>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <br>
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+                        <br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </section>
+            </section>
         </main>
 
         <footer>
             <p>&copy; 2025 Futuristic Beat. All rights reserved.</p>
         </footer>
     </div>
-    <!--
-    <h3>Feedback Form</h3>
-    <form action="submit.html" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name:">
-        <br>
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" placeholder="Enter your email:">
-        <br>
 
-        <br>
-        <label>Rate the Site:</label>
-        <input type="radio" id="excellent" name="rating" value="excellent">
-        <label for="excellent">Excellent</label>
-
-        <input type="radio" id="good" name="rating" value="good">
-        <label for="good">Good</label>
-
-        <input type="radio" id="average" name="rating" value="average">
-        <label for="average">Average</label>
-
-        <input type="submit" value="Submit">
-    </form>
-    -->
     <script src="main.js"></script>
 </body>
 

@@ -63,6 +63,7 @@ class Observer {
     }
 }
 
+/*
 const settings = new Settings();
 const otherSettings = new Settings();
 console.log(settings === otherSettings); // true
@@ -73,3 +74,48 @@ const subject = new Subject();
 subject.subscribe(observerA);
 subject.subscribe(observerB);
 subject.notify();
+*/
+
+/* Form Validation */
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.contact form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        let isValid = true;
+
+        // Validate name
+        if (nameInput.value.trim() === '') {
+            isValid = false;
+            alert('Name is required.');
+        }
+
+        // Validate email
+        if (emailInput.value.trim() === '') {
+            isValid = false;
+            alert('Email is required.');
+        } else if (!validateEmail(emailInput.value.trim())) {
+            isValid = false;
+            alert('Please enter a valid email address.');
+        }
+
+        // Validate message
+        if (messageInput.value.trim() === '') {
+            isValid = false;
+            alert('Message is required.');
+        }
+
+        if (isValid) {
+            alert('Form submitted successfully!');
+            form.reset();
+        }
+    });
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+});
