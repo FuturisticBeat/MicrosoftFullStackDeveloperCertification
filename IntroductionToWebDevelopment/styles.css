@@ -157,3 +157,17 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* Media Query for Tablets */
+@media (max-width: 1024px) {
+    .about-skills-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* Media Query for Large Screens */
+@media (min-width: 1025px) {
+    .about-skills-grid {
+        grid-template-columns: 5fr 1fr;
+    }
+}

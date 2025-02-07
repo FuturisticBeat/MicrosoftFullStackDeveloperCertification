@@ -77,6 +77,7 @@ subject.notify();
 */
 
 /* Form Validation */
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact form');
     const nameInput = document.getElementById('name');
