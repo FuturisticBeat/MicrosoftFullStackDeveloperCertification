@@ -1,0 +1,18 @@
+﻿@page "/recipe/{id:int}"
+@using RecipeManager.Data
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Recipe? _recipe;
+
+    protected override void OnParametersSet()
+    {
+        // Fetch the recipe (simulate fetching with a hardcoded list)
+        _recipe = Recipe.DummyRecipes.FirstOrDefault(r => r.Id == Id);
+    }
+}
+
+<h3>@_recipe?.Name</h3>
+<p>@_recipe?.Description</p>

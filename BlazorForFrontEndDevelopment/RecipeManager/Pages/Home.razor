@@ -1,7 +1,15 @@
 ﻿@page "/"
+@using RecipeManager.Data
 
-<PageTitle>Home</PageTitle>
-
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
+<h3>Recipe List</h3>
+<ul>
+    @foreach (Recipe recipe in Recipe.DummyRecipes)
+    {
+        <li>
+            <strong>@recipe.Name</strong> - @recipe.Description
+            <br>
+            <NavLink href="@($"/recipe/{recipe.Id}")" Match="NavLinkMatch.Prefix">View Details</NavLink>
+        </li> 
+    }
+</ul>
+<NavLink href="/addrecipe">Add Recipe</NavLink>

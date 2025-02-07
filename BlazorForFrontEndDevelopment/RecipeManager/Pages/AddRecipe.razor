@@ -1,0 +1,20 @@
+﻿@page "/addrecipe"
+@inject NavigationManager NavManager
+
+@code {
+    private string? _recipeName;
+    private string? _recipeDescription;
+    
+    private void SubmitRecipe()
+    {
+        // Logic to save the recipe (e.g., add it to a list of recipes)
+        NavManager.NavigateTo("/");
+    }
+}
+
+<h3>Add Recipe</h3>
+<input @bind="_recipeName" placeholder="Recipe Name"/>
+<br>
+<textarea @bind="_recipeDescription" placeholder="Recipe Description"></textarea>
+<br>
+<button @onclick="SubmitRecipe">Submit</button>
