@@ -1,0 +1,28 @@
+@inject DataService DataService
+@using Microsoft.AspNetCore.Components
+
+<ul>
+    @foreach (string item in DataService.GetData())
+    {
+        <li>@item</li>
+    }
+</ul>
+
+<ChildComponent @ref="childComponent" OnNotifyParent="HandleNotification" />
+
+@code {
+    [CascadingParameter]
+    public string ThemeColor { get; set; }
+
+    private ChildComponent childComponent;
+
+    private void HandleNotification()
+    {
+        // Logic to handle notifications from the child component
+        Console.WriteLine("Notification received from child component");
+    }
+}
+
+<div style="padding: 10px; border: 1px solid black; ">
+    <p style="color: @ThemeColor;">Reusable Component Content</p>
+</div>

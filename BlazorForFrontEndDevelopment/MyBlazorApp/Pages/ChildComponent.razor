@@ -1,0 +1,14 @@
+<button @onclick="NotifyParent">Notify Parent</button>
+
+@code {
+    [Parameter]
+    public EventCallback OnNotifyParent { get; set; }
+
+    private async Task NotifyParent()
+    {
+        if(OnNotifyParent.HasDelegate)
+        {
+            await OnNotifyParent.InvokeAsync();
+        }
+    }
+}
