@@ -1,0 +1,63 @@
+﻿<!-- Pages/Register.razor -->
+@page "/register"
+@using EventEaseApp.Models
+@using EventEaseApp.Services
+@inject UserSessionService UserSessionService
+
+<h3>Event Registration</h3>
+
+<EditForm Model="registration" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <InputText id="firstName" class="form-control" @bind-Value="registration.FirstName" />
+        <ValidationMessage For="@(() => registration.FirstName)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <InputText id="lastName" class="form-control" @bind-Value="registration.LastName" />
+        <ValidationMessage For="@(() => registration.LastName)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="registration.Email" />
+        <ValidationMessage For="@(() => registration.Email)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Phone Number</label>
+        <InputText id="phoneNumber" class="form-control" @bind-Value="registration.PhoneNumber" />
+        <ValidationMessage For="@(() => registration.PhoneNumber)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</EditForm>
+
+
+@code {
+    private Registration registration;
+
+    protected override void OnInitialized()
+    {
+        registration = new Registration();
+    }
+
+    private void HandleValidSubmit()
+    {
+        // Handle the registration logic
+        Console.WriteLine("Registration successful!");
+
+        // Save the user session data
+        UserSessionService.SetUserSession(new UserSession
+        {
+            UserId = Guid.NewGuid().ToString(), // Replace with actual user ID
+            UserName = registration.FirstName + " " + registration.LastName,
+            IsLoggedIn = true
+        });
+        // Optionally, redirect or show a success message
+    }
+}

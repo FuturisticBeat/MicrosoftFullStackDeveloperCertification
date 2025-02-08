@@ -1,0 +1,34 @@
+﻿@page "/events"
+
+@using EventEaseApp.Models
+@using EventEaseApp.Services
+@inject EventService EventService
+
+<h3>Upcoming Events</h3>
+
+@if (events?.Count == 0)
+{
+    <p>No events available.</p>
+}
+else if (events == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ul>
+        @foreach (Event evt in events)
+        {
+            <li @key="evt.Id">@evt.Name - @evt.Date.ToShortDateString() - @evt.Location</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<Event>? events;
+
+    protected override async Task OnInitializedAsync()
+    {
+        events = await EventService.GetEventsAsync();
+    }
+}
