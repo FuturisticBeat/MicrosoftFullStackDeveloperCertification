@@ -13,3 +13,18 @@
     }
 </ul>
 <NavLink href="/addrecipe">Add Recipe</NavLink>
+
+<EditForm Model="@_userDetails" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+</EditForm>
+
+@code
+{
+    private readonly UserDetails _userDetails = new UserDetails();
+    
+    private void HandleSubmit()
+    {
+        // Handle the form submission
+    }
+}

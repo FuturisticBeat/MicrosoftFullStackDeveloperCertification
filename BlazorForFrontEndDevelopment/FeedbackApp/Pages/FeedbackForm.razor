@@ -1,0 +1,46 @@
+﻿@page "/feedback"
+@using FeedbackApp.Models
+@using FeedbackApp.Services
+@inject FeedbackService FeedbackService
+
+<EditForm Model="@_feedback" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="name">Name:</label>
+        <InputText id="name" @bind-Value="_feedback.Name" class="form-control"/>
+    </div>
+    
+    <div>
+        <label for="email">Email:</label>
+        <InputText id="email" @bind-Value="_feedback.Email" class="form-control"/>
+    </div>
+    
+    <div>
+        <label for="comment">Comment:</label>
+        <InputTextArea id="comment" @bind-Value="_feedback.Comment" class="form-control"/>
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/feedback-list" class="btn btn-link">View Submitted Feedback</a>
+</EditForm>
+
+@if(_isFormSubmitted)
+{
+    <p>Thank you for your feedback!</p>
+}
+
+@code {
+    private Feedback _feedback = new ();
+    private bool _isFormSubmitted;
+    
+    private void HandleValidSubmit()
+    {
+        // Handle the form submission
+        FeedbackService.AddFeedback(_feedback);
+        _feedback = new Feedback();
+        _isFormSubmitted = true;
+    }
+}
