@@ -1,0 +1,26 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+### CREATE
+POST http://localhost:5142/blogs
+Content-Type: application/json
+{
+    "title": "Blog 4",
+    "content": "Content 4"
+}
+
+### READ
+GET http://localhost:5142/blogs
+
+### READ BY ID
+GET http://localhost:5142/blogs/3
+
+### UPDATE
+PUT http://localhost:5142/blogs/1
+Content-Type: application/json
+{
+    "title": "Blog 2 Updated",
+    "content": "Content 2 Updated"
+}
+
+### DELETE
+DELETE http://localhost:5142/blogs/1
