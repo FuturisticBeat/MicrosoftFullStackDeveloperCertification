@@ -1,0 +1,21 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+### root path
+GET http://localhost:5036
+
+### dynamic paths
+
+### route parameters
+GET http://localhost:5036/users/1/posts/poop
+
+### route constraint
+GET http://localhost:5036/products/1
+
+### optional route parameter
+GET http://localhost:5036/report/2025
+
+### catch all route
+GET http://localhost:5036/files/images/cats/cat1.jpg
+
+### query parameters
+GET http://localhost:5036/search?q=dotnet&page=8
