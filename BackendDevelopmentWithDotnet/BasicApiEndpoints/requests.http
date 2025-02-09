@@ -1,0 +1,22 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+GET http://localhost:5159
+
+###
+GET http://localhost:5159/downloads
+
+###
+
+PUT http://localhost:5159
+
+###
+
+DELETE http://localhost:5159
+
+###
+
+POST http://localhost:5159
+
+###
+
+GET http://localhost:5159/weatherforecast
