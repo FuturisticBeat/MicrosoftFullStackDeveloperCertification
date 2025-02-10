@@ -1,0 +1,23 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+### CREATE
+POST http://localhost:5217/api/store/items/addnew
+Content-Type: Application/json
+{
+    "name": "Item1",
+    "description": "Item Description1"
+}
+
+### READ
+GET http://localhost:5217/api/store/items
+
+### UPDATE
+PUT http://localhost:5217/api/store/items/update/0
+Content-Type: Application/json
+{
+    "name": "Item1",
+    "description": "Item Updated Description1"
+}
+
+### DELETE
+DELETE http://localhost:5217/api/store/items/delete/0
