@@ -1,53 +1,55 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using StoreApp.Models;
 
+// refactoring and optimization assisted with copilot
 namespace StoreApp.Controllers
 {
     [ApiController]
     [Route("api/store")]
     public class StoreController : ControllerBase
     {
-        private static List<Item> _items = new List<Item>();
+        private static readonly Dictionary<int, Item> _items = new();
+        private static int _nextId = 0;
 
         [HttpGet("items")]
-        public List<Item> GetItems() => _items;
+        public Ok<IEnumerable<Item>> GetItems() => TypedResults.Ok(_items.Values.AsEnumerable());
 
         [HttpPost("items/addnew")]
-        public IActionResult AddItem(Item item)
+        public IResult AddItem(Item item)
         {
-            Item? existingItem = _items.FirstOrDefault();
-
-            if (existingItem != null)
+            if (_items.Values.Any(i => i.Equals(item)))
             {
-                return Conflict(new { message = "Item already exists." });
+                return TypedResults.Conflict(new { message = "Item already exists." });
             }
 
-            _items.Add(item);
-            return CreatedAtAction(nameof(GetItems), new { id = _items.Count - 1 }, item);
+            int id = _nextId++;
+            _items[id] = item;
+            return TypedResults.Created(nameof(GetItems), item);
         }
 
         [HttpPut("items/update/{id:int}")]
-        public IActionResult UpdateItem(int id, Item item)
+        public IResult UpdateItem(int id, Item item)
         {
-            if (id < 0 || id >= _items.Count)
+            if (!_items.ContainsKey(id))
             {
-                return NotFound(new { message = "Item doesn't exist." });
+                return TypedResults.NotFound(new { message = "Item doesn't exist." });
             }
-            
+
             _items[id] = item;
-            return Ok(item);
+            return TypedResults.Ok(item);
         }
 
         [HttpDelete("items/delete/{id:int}")]
-        public IActionResult DeleteItem(int id)
+        public IResult DeleteItem(int id)
         {
-            if (id < 0 || id >= _items.Count)
+            if (!_items.ContainsKey(id))
             {
-                return NotFound(new { message = "Item doesn't exist." });
+                return TypedResults.NotFound(new { message = "Item doesn't exist." });
             }
 
-            _items.RemoveAt(id);
-            return Ok();
+            _items.Remove(id);
+            return TypedResults.Ok();
         }
     }
 }
