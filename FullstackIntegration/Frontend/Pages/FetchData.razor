@@ -1,0 +1,33 @@
+﻿@inject HttpClient Http
+@page "/fetch"
+
+<h3>Products</h3>
+@if (products == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ul>
+        @foreach (Product product in products)
+        {
+            <li>@product.Name</li>
+        }
+    </ul>
+}
+
+@code
+{
+    private Product[]? products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await Http.GetFromJsonAsync<Product[]>("http://localhost:5083/products");
+    }
+
+    private class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+}
