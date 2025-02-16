@@ -170,3 +170,62 @@ SUM(Salary)
 AS TotalSalary
 FROM Employees
 GROUP BY HireYear;
+
+# Stored Procedures
+DELIMITER $$
+CREATE PROCEDURE IncreaseSalary(
+    IN DepartmentName VARCHAR(50), 
+    IN IncreaseAmount DECIMAL(10, 2)
+)
+BEGIN
+    IF IncreaseAmount < 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Increase amount must be positive';
+    END IF;
+    
+    UPDATE Employees
+    SET Salary = Salary + IncreaseAmount
+    WHERE Department = DepartmentName;
+    
+    IF ROW_COUNT() = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No employees found in department';
+    END IF;
+END $$
+DELIMITER ;
+
+CALL IncreaseSalary('HR', 5000.00);
+
+SELECT * 
+FROM Employees
+WHERE Department = 'HR';
+
+# Functions
+DELIMITER $$
+CREATE FUNCTION CalculateBonus(Salary DECIMAL(10, 2))
+RETURNS DECIMAL(10, 2)
+DETERMINISTIC
+BEGIN 
+    IF Salary <= 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Salary must be positive';
+    END IF;
+    RETURN Salary * 0.10;
+END $$
+DELIMITER ;
+
+SELECT FirstName, LastName, CalculateBonus(Salary)
+AS Bonus
+FROM Employees;
+
+DELIMITER $$
+CREATE PROCEDURE GetRecentHires (IN DateHired DATE)
+BEGIN
+    -- Query to return a table of recent hires
+    SELECT *
+    FROM Employees
+    WHERE HireDate > DateHired;
+END $$
+DELIMITER ;
+
+CALL GetRecentHires('2022-01-01');
