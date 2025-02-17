@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SharedModels
+namespace Backend.Models
 {
     /// <summary>
     /// Represents a product with an ID, name, description, and price.

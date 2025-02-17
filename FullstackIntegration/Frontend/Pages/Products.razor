@@ -1,6 +1,9 @@
 ﻿@inject HttpClient Http
-@page "/fetch"
-@using SharedModels
+@page "/products"
+@using Product = ProductsApi.Product
+@using ProductsApi
+
+<PageTitle>Products</PageTitle>
 
 <h3>Products</h3>
 @if (products == null)
@@ -19,13 +22,14 @@ else
 
 @code
 {
-    private Product[]? products;
+    private ICollection<Product>? products;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            products = await Http.GetFromJsonAsync<Product[]>("http://localhost:5083/products");
+            ProductsApiClient client = new("http://localhost:5083", Http);
+            products = await client.ProductsAllAsync();
         }
         catch (Exception e)
         {

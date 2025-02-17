@@ -1,6 +1,6 @@
 using Backend.Data;
+using Backend.Models;
 using Microsoft.EntityFrameworkCore;
-using SharedModels;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
