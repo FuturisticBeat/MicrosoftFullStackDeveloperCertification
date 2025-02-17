@@ -1,19 +1,36 @@
-var builder = WebApplication.CreateBuilder(args);
+using Backend.Data;
+using Microsoft.EntityFrameworkCore;
+using SharedModels;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configure CORS to allow requests from http://localhost
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policyBuilder =>
     {
-        policyBuilder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed(_ => true);
+        policyBuilder
+            .WithOrigins("http://localhost:5037")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 
-var app = builder.Build();
+// Add the ProductsDbContext to the service container and configure it to use SQL Server
+// The connection string is retrieved from the appsettings.Development.json file
+// Ensure that the SQL Server instance is running and accessible
+builder.Services.AddDbContext<ProductsDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -23,35 +40,22 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors();
-app.UseHttpsRedirection();
 
-var summaries = new[]
+// Retrieves all products from the database.
+app.MapGet("/products", async (ProductsDbContext db) => await db.Products.ToListAsync());
+
+// Retrieves a product by its ID from the database.
+app.MapGet("/products/{id:int}", async Task<IResult> (int id, ProductsDbContext db) =>
+    await db.Products.FindAsync(id) is { } product ? 
+        TypedResults.Ok(product) : 
+        TypedResults.NotFound());
+
+// Adds a new product to the database. The product data is sent in the request body.
+app.MapPost("/products", async (Product product, ProductsDbContext db) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-    {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast")
-    .WithOpenApi();
-
-app.MapGet("/products", () => new[] { new { Id = 1, Name = "Product 1" }, new { Id = 2, Name = "Product 2" } })
-    .WithName("GetProducts")
-    .WithOpenApi();
+    db.Products.Add(product);
+    await db.SaveChangesAsync();
+    return TypedResults.Created($"/products/{product.ProductId}", product);
+});
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
