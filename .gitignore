@@ -121,3 +121,58 @@ temp/
 *.orig
 *.rej
 *~
+
+# ASP.NET Core specific ignores
+publish/
+publishoutput/
+*.Publish.xml
+*.vspscc
+*.scc
+
+# Build files
+/Build/
+/GeneratedFiles/
+/TempPE/
+
+# Project-specific files
+project.lock.json
+artifacts/
+
+# ASP.NET Core
+wwwroot/node_modules/
+node_modules/
+dist/
+
+# Entity Framework
+Migrations/
+efcache/
+
+# Sensitive data
+appsettings.Development.json
+appsettings.*.json
+
+# SQL Server
+*.mdf
+*.ldf
+*.ndf
+
+# MySQL
+*.sql
+*.frm
+*.ibd
+*.myi
+*.myd
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# PostgreSQL
+*.pgsql
+*.pg_dump
+
+# Oracle
+*.dmp
+*.log
+
