@@ -1,4 +1,5 @@
 using Backend.Data;
+using Backend.Hubs;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,9 @@ builder.Services.AddCors(options =>
             .AllowCredentials();
     });
 });
+
+// Add SignalR to the service container
+builder.Services.AddSignalR();
 
 // Add the ProductsDbContext to the service container and configure it to use SQL Server
 // The connection string is retrieved from the appsettings.Development.json file
@@ -57,5 +61,8 @@ app.MapPost("/products", async (Product product, ProductsDbContext db) =>
     await db.SaveChangesAsync();
     return TypedResults.Created($"/products/{product.ProductId}", product);
 });
+
+// Maps the ChatHub to the /chat endpoint for SignalR communication.
+app.MapHub<ChatHub>("/chat");
 
 app.Run();
