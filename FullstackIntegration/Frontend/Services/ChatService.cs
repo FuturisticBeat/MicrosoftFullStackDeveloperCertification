@@ -20,6 +20,13 @@ namespace Frontend.Services
             {
                 OnMessageReceived?.Invoke(message);
             });
+
+            _hubConnection.Closed += async error =>
+            {
+                // Reconnect after 5 seconds
+                await Task.Delay(5000);
+                await _hubConnection.StartAsync();
+            };
         }
         
         public async Task StartAsync()

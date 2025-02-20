@@ -1,0 +1,19 @@
+{
+  "runtime": "Net90",
+  "defaultVariables": null,
+  "documentGenerator": {
+    "fromDocument": {
+      "url": "http://localhost:5083/swagger/v1/swagger.json",
+      "output": null,
+      "newLineBehavior": "Auto"
+    }
+  },
+  "codeGenerators": {
+    "openApiToCSharpClient": {
+      "className": "ProductsApiClient",
+      "namespace": "ProductsApi",
+      "useBaseUrl": false,
+      "output": "../../Frontend/GeneratedClients/ProductsApiClient.cs"
+    }
+  }
+}

@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Backend.Data;
 using Backend.Hubs;
 using Backend.Models;
@@ -34,6 +35,14 @@ builder.Services.AddDbContext<ProductsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// Configure JSON serialization options to preserve object references.
+// This is necessary to handle circular references in the object graph,
+// which can occur when navigating relationships between entities.
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,20 +55,54 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
 
 // Retrieves all products from the database.
-app.MapGet("/products", async (ProductsDbContext db) => await db.Products.ToListAsync());
+app.MapGet("/api/products", async (ProductsDbContext db) => await db.Products
+    .Include(p => p.Category).ToListAsync());
 
 // Retrieves a product by its ID from the database.
-app.MapGet("/products/{id:int}", async Task<IResult> (int id, ProductsDbContext db) =>
-    await db.Products.FindAsync(id) is { } product ? 
-        TypedResults.Ok(product) : 
-        TypedResults.NotFound());
+app.MapGet("/api/products/{id:int}", async Task<IResult> (int id, ProductsDbContext db) =>
+    await db.Products.Include(p => p.Category)
+        .FirstOrDefaultAsync(p => p.ProductId == id) is { } product
+        ? TypedResults.Ok(product)
+        : TypedResults.NotFound());
 
 // Adds a new product to the database. The product data is sent in the request body.
-app.MapPost("/products", async (Product product, ProductsDbContext db) =>
+app.MapPost("/api/products", async (Product product, ProductsDbContext db) =>
 {
     db.Products.Add(product);
     await db.SaveChangesAsync();
     return TypedResults.Created($"/products/{product.ProductId}", product);
+});
+
+// Updates an existing product in the database. The product data is sent in the request body.
+app.MapPut("/api/products/{id:int}", async Task<IResult> (int id, Product product, ProductsDbContext db) =>
+{
+    Product? existingProduct = await db.Products.FindAsync(id);
+    if (existingProduct == null)
+    {
+        return TypedResults.NotFound("Product not found");
+    }
+
+    existingProduct.Name = product.Name;
+    existingProduct.Description = product.Description;
+    existingProduct.Price = product.Price;
+    existingProduct.Stock = product.Stock;
+
+    await db.SaveChangesAsync();
+    return TypedResults.NoContent();
+});
+
+// Deletes a product by its ID from the database.
+app.MapDelete("/api/products/{id:int}", async Task<IResult> (int id, ProductsDbContext db) =>
+{
+    Product? product = await db.Products.FindAsync(id);
+    if (product == null)
+    {
+        return TypedResults.NotFound("Product not found");
+    }
+
+    db.Products.Remove(product);
+    await db.SaveChangesAsync();
+    return TypedResults.NoContent();
 });
 
 // Maps the ChatHub to the /chat endpoint for SignalR communication.

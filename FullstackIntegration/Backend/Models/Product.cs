@@ -33,5 +33,21 @@ namespace Backend.Models
         /// Gets or sets the product price.
         /// </summary>
         public decimal Price { get; set; } = 10m;
+        
+        /// <summary>
+        /// Gets or sets the product quantity.
+        /// </summary>
+        public int Stock { get; set; } = 0;
+        
+        /// <summary>
+        /// Gets or sets the category ID associated with the product.
+        /// </summary>
+        public int CategoryId { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the category associated with the product.
+        /// This is a navigation property used by Entity Framework Core.
+        /// </summary>
+        public Category Category { get; set; }
     }
 }

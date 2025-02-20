@@ -1,40 +1,63 @@
-﻿@inject HttpClient Http
-@page "/products"
-@using Product = ProductsApi.Product
+﻿@page "/products"
 @using ProductsApi
+@inject ProductsApiClient ProductsClient
 
 <PageTitle>Products</PageTitle>
 
 <h3>Products</h3>
-@if (products == null)
+@if (_products == null)
 {
     <p>Loading...</p>
 }
+else if (!string.IsNullOrEmpty(_errorMessage))
+{
+    <p>@_errorMessage</p>
+}
 else
 {
-    <ul>
-        @foreach (Product product in products)
-        {
-            <li>@product.Name</li>
-        }
-    </ul>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (Product product in _products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
+                    <td>@product.Stock</td>
+                    <td>@product.Category.Name</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 }
 
 @code
 {
-    private ICollection<Product>? products;
+    private ICollection<Product>? _products;
+    private string? _errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            ProductsApiClient client = new("http://localhost:5083", Http);
-            products = await client.ProductsAllAsync();
+            _products = await ProductsClient.ProductsAllAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine($"error fetching data: {e.Message}");
-            products = null;
+            _products = new List<Product>();
+            _errorMessage = "Error fetching data. Please try again later.";
         }
     }
 }
