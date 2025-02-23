@@ -1,0 +1,6 @@
+@OAuthServer_HostAddress = http://localhost:5181
+
+GET {{OAuthServer_HostAddress}}/api/oauth/authorize?responseType=code&clientId=clientApp&redirectUri={{OAuthServer_HostAddress}}/api/oauth/callback&state=xyz
+Accept: application/json
+
+###
