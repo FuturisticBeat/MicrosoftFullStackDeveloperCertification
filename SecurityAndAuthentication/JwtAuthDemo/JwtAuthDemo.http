@@ -1,0 +1,13 @@
+@JwtAuthDemo_HostAddress = http://localhost:5250
+
+GET {{JwtAuthDemo_HostAddress}}/User/secure-data
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImp0aSI6IjgxMjVjMDc4LTM5YzgtNDU2Ni1iZjE5LWNjZjNjMWIzYjRiOSIsImV4cCI6MTc0MDM3MTgyNywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjUwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjUxIn0.CbOxEbPpvCCFRquAahLqHjoNTdXd8YFuL7MktsL2FK8
+
+###
+POST {{JwtAuthDemo_HostAddress}}/User/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
