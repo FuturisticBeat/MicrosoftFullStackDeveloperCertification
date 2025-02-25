@@ -7,10 +7,9 @@ namespace EncryptionApp.Models
     public class IndexModel : PageModel
     {
         private readonly EncryptionService _encryptionService;
-        
-        [BindProperty]
-        public IFormFile? UploadedFile { get; set; }
-        
+
+        [BindProperty] public IFormFile? UploadedFile { get; set; }
+
         public IndexModel(EncryptionService encryptionService)
         {
             _encryptionService = encryptionService;
@@ -22,10 +21,13 @@ namespace EncryptionApp.Models
             {
                 return;
             }
+
             string inputPath = Path.Combine("wwwroot", UploadedFile.FileName);
             string encryptedPath = Path.Combine("wwwroot", $"encrypted_{UploadedFile.FileName}");
-            using FileStream stream = new(inputPath, FileMode.Create);
-            UploadedFile.CopyTo(stream);
+            using (FileStream stream = new(inputPath, FileMode.Create))
+            {
+                UploadedFile.CopyTo(stream);
+            }
             _encryptionService.EncryptFile(inputPath, encryptedPath);
         }
 
@@ -35,9 +37,9 @@ namespace EncryptionApp.Models
             {
                 return;
             }
-            
+
             string encryptedPath = Path.Combine("wwwroot", UploadedFile.FileName);
-            string decryptedPath = Path.Combine("wwwroot", $"decrypted{UploadedFile.FileName}");
+            string decryptedPath = Path.Combine("wwwroot", $"decrypted_{UploadedFile.FileName}");
             _encryptionService.DecryptFile(encryptedPath, decryptedPath);
         }
     }

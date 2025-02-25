@@ -29,10 +29,10 @@ namespace EncryptionApp.Services
         public void DecryptFile(string inputPath, string outputPath)
         {
             using Aes aes = Aes.Create();
-            using ICryptoTransform encryptor = aes.CreateDecryptor(_key, _iv);
+            using ICryptoTransform decryptor = aes.CreateDecryptor(_key, _iv);
             using FileStream inputStream = new (inputPath, FileMode.Open);
             using FileStream outputStream = new (outputPath, FileMode.Create);
-            using CryptoStream cryptoStream = new (outputStream, encryptor, CryptoStreamMode.Read);
+            using CryptoStream cryptoStream = new (inputStream, decryptor, CryptoStreamMode.Read);
             cryptoStream.CopyTo(outputStream);
         }
     }
