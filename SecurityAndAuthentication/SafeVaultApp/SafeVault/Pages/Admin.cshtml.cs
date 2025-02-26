@@ -7,12 +7,9 @@ namespace SafeVault.Pages
     /// <summary>
     /// Represents the page model for the Admin page in the SafeVault application.
     /// This page requires authorization to access.
+    /// Uses Role-based authorization
     /// </summary>
-    // Use Role-based authorization
     [Authorize(Roles = "Admin")]
-    // OR
-    // Use Policy-based authorization
-    [Authorize(Policy = "CanAccessAdminPage")]
     public class AdminModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;

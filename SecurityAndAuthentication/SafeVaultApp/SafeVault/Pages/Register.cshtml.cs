@@ -67,7 +67,7 @@ public class RegisterModel(UserManager<IdentityUser> userManager, SignInManager<
             await userManager.AddToRoleAsync(user, "User");
             await signInManager.SignInAsync(user, isPersistent: false);
             
-            return RedirectToPage("Login");
+            return RedirectToPage("SecurePage");
         }
         
         // If registration fails, add errors to the ModelState.

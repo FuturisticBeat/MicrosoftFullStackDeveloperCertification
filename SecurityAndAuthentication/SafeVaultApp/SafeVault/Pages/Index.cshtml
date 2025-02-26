@@ -5,14 +5,33 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    @if (Model.CurrentUser == null)
+    {
+        <h1 class="display-4">Welcome</h1>
+    }
+    else
+    {
+        <h1 class="display-4">Hello @Model.CurrentUser.UserName</h1>
+    }
     <br>
     <div class="row justify-content-center mt-4">
         <div class="col-md-6">
-            <div class="d-flex justify-content-around">
-                <a asp-page="/Login" class="btn btn-primary rounded w-100 me-3">Login</a>
-                <a asp-page="/Register" class="btn btn-secondary rounded w-100">Register</a>
-            </div>
+            @if (Model.CurrentUser != null)
+            {
+                <form method="post" asp-page-handler="Logout">
+                    <div class="d-flex justify-content-around">
+                        <button type="submit" class="btn btn-danger rounded me-3 w-100">Logout</button>
+                        <a asp-page="/SecurePage" class="btn btn-secondary rounded w-100">Account</a>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="d-flex justify-content-around">
+                    <a asp-page="/Login" class="btn btn-primary rounded w-100 me-3">Login</a>
+                    <a asp-page="/Register" class="btn btn-secondary rounded w-100">Register</a>
+                </div>
+            }
         </div>
     </div>
 </div>
