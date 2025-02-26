@@ -1,8 +1,12 @@
 ﻿@page
 @model SafeVault.Pages.SecurePage
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Secure Page";
+    IdentityUser? user = UserManager.GetUserAsync(User).Result;
+    bool isAdmin = user != null && UserManager.IsInRoleAsync(user, "Admin").Result;
 }
 
 <div class="text-center">
@@ -10,4 +14,8 @@
     <br>
     <p class="blockquote">This page is only accessible after a successful login</p>
     <br>
+    @if (isAdmin)
+    {
+        <a asp-page="/Admin" class="btn btn-primary">Admin</a>
+    }
 </div>

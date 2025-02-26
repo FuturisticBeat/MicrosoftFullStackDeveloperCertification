@@ -1,0 +1,29 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@model AdminModel
+@{
+    ViewData["Title"] = "Admin - Users";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">All Users</h1>
+    <table class="table table-striped mt-4">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Roles</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (IdentityUser user in Model.Users)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.UserName</td>
+                <td>@string.Join(", ", Model.UserRoles[user.Id])</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

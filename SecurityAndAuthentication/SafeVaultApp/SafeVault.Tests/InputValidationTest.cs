@@ -18,7 +18,7 @@ namespace SafeVault.Tests
         [InlineData("ValidInput123", true)]
         [InlineData("<script>alert('XSS')</script>", false)]
         [InlineData("ValidInput123!", false)]
-        [InlineData("ValidInput123!", true, "!@#$%^&*?")]
+        [InlineData("ValidInput123!", true, "!@#$%^&*?-")]
         [InlineData("", false)]
         [InlineData("   ", false)]
         public void IsValidInput_ShouldValidateInputCorrectly(string input, bool expectedResult, string allowedSpecialCharacters = "")

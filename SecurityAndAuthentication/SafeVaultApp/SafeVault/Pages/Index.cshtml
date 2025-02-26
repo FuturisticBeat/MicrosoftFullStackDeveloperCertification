@@ -7,21 +7,12 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <br>
-    <p class="display-6">Login to continue</p>
-    <br>
-    <!-- webform.html -->
-    <form method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" asp-for="Username">
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" asp-for="Password">
-
-        <button type="submit" asp-page-handler="Submit">Submit</button>
-    </form>
-    
-    @if (Model.LoginFailed)
-    {
-        <p style="color:red;">Login failed. Please check your credentials and try again.</p>
-    }
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <div class="d-flex justify-content-around">
+                <a asp-page="/Login" class="btn btn-primary rounded w-100 me-3">Login</a>
+                <a asp-page="/Register" class="btn btn-secondary rounded w-100">Register</a>
+            </div>
+        </div>
+    </div>
 </div>
